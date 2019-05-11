@@ -11,6 +11,8 @@ public:
 	using const_reference = const T&;
 	using size_type = std::size_t;
 	using pointer = T*;
+	using iterator = T*;
+	using const_iterator = const T*;
 
 //////////////////////CONSTRUCTORS//////////////////////
 	//default
@@ -85,22 +87,52 @@ public:
 	reference back() { return elem_[size() - 1]; }
 	const_reference back() const { return elem_[size() - 1]; }
 
+	//iterator pointing to the first element of the container
+	iterator begin() {
+		return &elem_[0];
+	}
+
 	//capacity of a Vector
 	size_type capacity() const { return capacity_; }
 
 	//size_ = 0, capacity stays the same
 	void clear() noexcept {
-		if (size_ > 0) {
-			delete[] elem_;
-			size_ = 0;
+		for (auto i = 0; i < size_; i++) {
+			elem_[i].~value_type();
 		}
+		size_ = 0;
 	}
 
 	//pointer to the data of a vector
 	pointer data() noexcept { return elem_; }
 	const pointer data() const noexcept { return elem_; }
 
+	//emplaces new object at specified pos and returns iterator, pointing to that place
+	template< class... Args >
+	iterator emplace( const_iterator pos, Args&&... args ){
+		iterator tmp = begin();
+		size_type i = 0;
+		while (tmp != pos) {
+			i++;
+			tmp++;
+		}
+		tmp = nullptr;
 
+		if (size_ + 1 > capacity_) {
+			reserve(capacity_ * 2);
+		}
+		for (auto j = size_; j > i; j--) {
+			elem_[j] = elem_[j - 1];
+		}
+		elem_[i] = value_type(std::forward<Ts>(args)...);
+
+		size_++;
+
+		return &elem_[i];
+	}
+
+
+	//emplaces new object back to the array
 	template <typename... Ts>
 	void emplace_back(Ts&&... args) {
 		push_back(value_type(std::forward<Ts>(args)...));
@@ -109,16 +141,44 @@ public:
 	//check if container is empty. //TODO: rebuild with iterators
 	bool empty() const { return size_ == 0; }
 
+	//next address after the last element
+	iterator end() {return elem_ + size_;}
+
 	//reference to the first element
 	reference front() { return elem_[0]; }
 	const_reference front() const { return elem_[0]; }
 
+	//inserts new object at specified pos and returns iterator, pointing to that place
+	iterator insert(iterator pos, const_reference value) {
+		iterator tmp = begin();
+		size_type i = 0;
+		while (tmp != pos) {
+			i++;
+			tmp++;
+		}
+		tmp = nullptr;
+
+		if (size_ + 1 > capacity_) {
+			reserve(capacity_ * 2);
+		}
+		for (auto j = size_; j > i; j--) {
+			elem_[j] = elem_[j - 1];
+		}
+		elem_[i] = value;
+
+		size_++;
+
+		return &elem_[i];
+	}
+
+	//removes last element from the container
 	void pop_back() {
 		if (size_ > 0) {
 			delete &elem_[--size_];
 		}
 	}
 
+	//pushes a new element to the back of the container
 	void push_back(const_reference value ) {
 		if (capacity_ == 0) {
 			elem_ = new value_type[1];
@@ -160,6 +220,7 @@ public:
 		}
 	}
 
+	//resizes the container
 	void resize(size_type count) {
 		if (count < 0) throw std::out_of_range {"Vector::resize"};
 		if (count < size_) {
@@ -251,18 +312,14 @@ private:
 	size_type capacity_;
 };
 
+
 #endif
 
 //get_allocator
 
-//begin
-//end
 //rbegin
 //rend
 
 //max_size
 
-//insert
 //emplace
-
-//emplace_back

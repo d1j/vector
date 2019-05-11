@@ -28,16 +28,13 @@ void printArr(T arr) {
 
 
 int main() {
-	Vector<y_gor_iok> a;
+	Vector<int> a{1, 2, 3, 4};
+	cout<<a.size()<<a.capacity()<<endl;
+	cout<<a.data()<<endl;
+	printArr(a);
+	auto b = a.begin();
+	cout<<a.insert(b, 50)<<endl;
+	cout<<a.data()<<endl;
 
-	y_gor_iok yg(15, 12);
-	a.push_back(yg);
-
-	a.emplace_back(20, 20);
-
-	cout << a.size() << endl << a.capacity()<<endl;
-
-	a[0].print();
-	a[1].print();
-
+	printArr(a);
 }
