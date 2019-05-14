@@ -118,8 +118,8 @@ public:
 	const pointer data() const noexcept { return elem_; }
 
 	//emplaces new object at specified pos and returns iterator, pointing to that place
-	template <class... Args>
-	iterator emplace(const_iterator pos, Args &&... args)
+	template <class... Ts>
+	iterator emplace(const_iterator pos, Ts &&... args)
 	{
 		iterator tmp = begin();
 		size_type i = 0;

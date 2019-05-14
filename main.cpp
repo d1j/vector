@@ -1,40 +1,35 @@
 #include "Vector.h"
 
 #include <iostream>
+#include <chrono>
 
 #include <vector>
 
 using namespace std;
-
-class y_gor_iok {
-private:
-	int a;
-	int b;
-public:
-	y_gor_iok() : a(0), b(0) {}
-	y_gor_iok(int a_, int b_) : a(a_), b(b_) {}
-	void print() {
-		cout << a << " " << b << endl;
-	}
-};
-
-template <typename T>
-void printArr(T arr) {
-	for (auto i = 0; i < arr.size(); ++i) {
-		std::cout << arr[i] << " ";
-	}
-	cout << endl;
-}
-
+using namespace std::chrono;
 
 int main() {
-	Vector<int> a{1, 2, 3, 4};
-	cout<<a.size()<<a.capacity()<<endl;
-	cout<<a.data()<<endl;
-	printArr(a);
-	auto b = a.begin();
-	cout<<a.insert(b, 50)<<endl;
-	cout<<a.data()<<endl;
+	unsigned int sz = 10000000;  // 100000, 1000000, 10000000, 100000000
+	//auto start1 = high_resolution_clock::now();
+	int kiekis = 0;
+	std::vector<int> v1;
+	for (int i = 1; i <= sz; ++i) {
+		if (v1.size() == v1.capacity()) kiekis++;
+		v1.push_back(i);
+	}
+	/*auto end1 = high_resolution_clock::now();
+	duration<double> diff1 = end1 - start1;*/
+	cout << "std::vector" << kiekis << "s.\n";
 
-	printArr(a);
+	Vector<int> v2;
+	kiekis = 0;
+	//auto start2 = high_resolution_clock::now();
+	for (int i = 1; i <= sz; ++i) {
+		if (v2.size() == v2.capacity()) kiekis++;
+		v2.push_back(i);
+	}
+	/*auto end2 = high_resolution_clock::now();
+	duration<double> diff2 = end2 - start2;*/
+	cout << "Vecotr" << kiekis << "s.\n";
+
 }
