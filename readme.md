@@ -16,8 +16,8 @@ void reserve(size_type new_cap) {
     }
 }
 ```
-Funkcija pakeičia konteinerio talpą jeigu pateiktas argumentas `new_cap` yra didesnis nei esama konteinerio talpa. Jei argumentas tenkina sąlygą, konteinerio elementai perkopijuojami į naujai išskirtą atminties vietą, o sena atminties vieta atlaisvinama.
 
+Funkcija pakeičia konteinerio talpą jeigu pateiktas argumentas `new_cap` yra didesnis nei esama konteinerio talpa. Jei argumentas tenkina sąlygą, konteinerio elementai perkopijuojami į naujai išskirtą atminties vietą, o sena atminties vieta atlaisvinama.
 
 ```c++
 void shrink_to_fit() {
@@ -61,6 +61,7 @@ void pop_back() {
     }
 }
 ```
+
 Funkcija ištrina paskutinį konteinerio elementą iškviesdama jo destruktorių. Konteinerio talpa nepakinta. Dydis keičiasi.
 
 ```c++
@@ -70,9 +71,11 @@ reference operator[](size_type i)	{
     return elem_[i];
 }
 ```
+
 Operatorius leidžia pasiekti bet kokį konteinerio elementą ir gražina "referenc'ą" į jį.
 
 ## 2 užduotis
+
 push_back()
 
 | Konteineris | Talpa     | Vidutinis laikas |
@@ -84,11 +87,15 @@ push_back()
 | std::vector | 100000000 | 1.71695s         |
 | Vector      | 100000000 | 1.74192s         |
 
-
 ## 3 užduotis
+
 capacity() == size()
 
 | Konteineris | Talpa     | capacity() == size() |
 | ----------- | --------- | -------------------- |
 | std::vector | 100000000 | 28 kartai            |
 | Vector      | 100000000 | 28 kartai            |
+
+## 4 užduotis
+
+[Nuoroda į releasą](https://github.com/d1j/OBJ-3uzd/releases/tag/v3.0)
