@@ -78,24 +78,26 @@ Operatorius leidžia pasiekti bet kokį konteinerio elementą ir gražina "refer
 
 push_back()
 
-| Konteineris | Talpa     | Vidutinis laikas |
-| ----------- | --------- | ---------------- |
-| std::vector | 1000000   | 0.015626s        |
-| Vector      | 1000000   | 0.015611s        |
-| std::vector | 10000000  | 0.187927s        |
-| Vector      | 10000000  | 0.171654s        |
-| std::vector | 100000000 | 1.71695s         |
-| Vector      | 100000000 | 1.74192s         |
+| Konteineris        | Talpa     | Vidutinis laikas |
+| ------------------ | --------- | ---------------- |
+| `std::vector<int>` | 1000000   | 0.015626s        |
+| `Vector<int>`      | 1000000   | 0.015611s        |
+| `std::vector<int>` | 10000000  | 0.187927s        |
+| `Vector<int>`      | 10000000  | 0.171654s        |
+| `std::vector<int>` | 100000000 | 1.71695s         |
+| `Vector<int>`      | 100000000 | 1.74192s         |
 
 ## 3 užduotis
 
 capacity() == size()
 
-| Konteineris | Talpa     | capacity() == size() |
-| ----------- | --------- | -------------------- |
-| std::vector | 100000000 | 28 kartai            |
-| Vector      | 100000000 | 28 kartai            |
+| Konteineris        | Talpa     | capacity() == size() |
+| ------------------ | --------- | -------------------- |
+| `std::vector<int>` | 100000000 | 28 kartai            |
+| `Vector<int>`      | 100000000 | 28 kartai            |
 
 ## 4 užduotis
 
 [Nuoroda į releasą](https://github.com/d1j/OBJ-3uzd/releases/tag/v3.0)
+
+## Papildoma užduotis
